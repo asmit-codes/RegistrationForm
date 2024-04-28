@@ -5,7 +5,7 @@ var userRoutes = require('./routes/userRoutes')
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static('pages'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -40,7 +40,7 @@ app.post("/submit", (req, res) => {
         }
         console.log("Record Inserted Succesfully");
     });
-    return res.redirect('success.html');
+    res.sendFile(__dirname + '/pages/success.html');
 });
 
 app.get("/", (req, res) => {
