@@ -4,13 +4,18 @@ var mongoose = require("mongoose");
 var userRoutes = require('./routes/userRoutes')
 const app = express();
 
+const dotenv = require('dotenv'); // Require dotenv package
+
+// Configure dotenv to load variables from .env file
+dotenv.config();
+
 app.use(express.json());
 app.use(express.static('pages'));
 app.use(express.urlencoded({
     extended: true
 }));
 
-mongoose.connect('mongodb://localhost:27017/registration', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -50,6 +55,6 @@ app.get("/", (req, res) => {
     });
     return res.redirect('index.html');
 })
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Listening on port 3000");
   });
