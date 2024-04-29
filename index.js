@@ -40,7 +40,8 @@ app.post("/submit", (req, res) => {
         }
         console.log("Record Inserted Succesfully");
     });
-    res.sendFile(__dirname + '/pages/success.html');
+    const path = require('path');
+res.sendFile(path.join(__dirname, 'pages', 'success.html'));
 });
 app.use('/users', userRoutes);
 app.get("/", (req, res) => {
