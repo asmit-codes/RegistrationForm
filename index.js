@@ -4,24 +4,17 @@ var mongoose = require("mongoose");
 var userRoutes = require('./routes/userRoutes')
 const app = express();
 
-const dotenv = require('dotenv'); // Require dotenv package
-
-// Configure dotenv to load variables from .env file
-dotenv.config();
 
 app.use(express.json());
 app.use(express.static('pages'));
 app.use(express.urlencoded({
     extended: true
 }));
-const username = process.env.MONGODB_USERNAME;
-const password = process.env.MONGODB_PASSWORD;
 
-mongoose.connect('mongodb+srv://$(username):<$(password)>@cluster0.ukgkazx.mongodb.net/registrationform', {
+mongoose.connect('mongodb+srv://infoasmitkumar:qwertyuiop@bharatdb.amjmiin.mongodb.net/?retryWrites=true&w=majority&appName=bharatdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
 var db = mongoose.connection;
 db.on('error', () => console.log("Error in Connecting to Database"));
 db.once('open', () => console.log("Connected to Database"));
@@ -56,7 +49,6 @@ app.get("/", (req, res) => {
         "Allow-access-Allow-Origin": '*'
     });
     return res.redirect('index.html');
-})
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Listening on port 3000");
-  });
+}).listen(3000);
+
+console.log("Listening on port 3000");
