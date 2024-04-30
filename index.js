@@ -14,8 +14,10 @@ app.use(express.static('pages'));
 app.use(express.urlencoded({
     extended: true
 }));
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASSWORD;
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://$(username):<$(password)>@cluster0.ukgkazx.mongodb.net/registrationform', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
